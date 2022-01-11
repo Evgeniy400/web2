@@ -7,54 +7,53 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-     public $arr = array(
-        [
-        'id' => 1,
-        'login' => 'admin',
-        'password' => 'password'
-         ],
-        [
-        'id' => 2,
-        'login' => 'biba',
-        'password' => '12345'
-        ],
-        [
-        'id' => 3,
-        'login' => 'boba',
-        'password' => 'qwerty'
-        ]
-        );
+    public $arr = [];
 
-     /**
+    public function init()
+    {
+        $this->arr = User::query()->get();
+    }
+
+    /**
      * Список пользователей.
      * @return array[]
      */
-     public function list()
-     {
-         return $this->arr;
-     }
+    public function list()
+    {
+        $this->init();
+        return $this->arr;
+    }
 
-     /**
+    /**
      * Информация о пользователе
      * @param $id
      * @return array
      */
-     public function info($id)
-     {
-         return  $this->arr[$id-1];
-     }
+    public function info($id)
+    {
+        $this->init();
+        return $this->arr[$id - 1];
+    }
 
-     public function authorization(Request $request)
-     {
-        foreach ($this->arr as $value) {
-            if ($value['login'] == $request->get('login') && $value['password']== $request->get('password')){
-                    return [
-                        'userId'=> $value['id']
-                    ];
+    public function authorization(Request $request)
+    {
+        $arr = [];
+        $arr = User::query()->where(['name' => $request->get('name')])->first();
+        if ($arr == NULL) {
+            return [
+                'userId' => -1
+            ];
+        } else {
+            if ($arr['password'] == $request->get('password')) {
+                return [
+                    'userId' => $arr['id']
+                ];
+            } else {
+                return [
+                    'userId' => -1
+                ];
             }
         }
-                return [
-                    'userId'=> -1
-                ];
-     }
+
+    }
 }
