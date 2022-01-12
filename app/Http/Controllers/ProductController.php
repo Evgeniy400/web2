@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Domain\Product\Models\Product;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Routing\Controller;
 
 /**
@@ -11,31 +12,22 @@ use Illuminate\Routing\Controller;
 class ProductController extends Controller
 {
 
-    public $arr = [];
-
-    public function init()
-    {
-        $this->arr = Product::query()->get();
-    }
-
     /**
      * Список товаров.
      * @return array
      */
     public function list()
     {
-        $this->init();
-        return $this->arr;
+        return Product::query()->get();
     }
 
     /**
      * Информация о товаре
      * @param $id
-     * @return array
+     * @return Model|object
      */
     public function info($id)
     {
-        $this->init();
-        return $this->arr[$id - 1];
+        return Product::query()->where(['id' => $id])->first();
     }
 }

@@ -3,37 +3,30 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public $arr = [];
-
-    public function init()
-    {
-        $this->arr = User::query()->get();
-    }
-
     /**
      * Список пользователей.
-     * @return array[]
+     * @return Collection
      */
     public function list()
     {
-        $this->init();
-        return $this->arr;
+        return User::query()->get();
     }
 
     /**
      * Информация о пользователе
      * @param $id
-     * @return array
+     * @return Model|object
      */
     public function info($id)
     {
-        $this->init();
-        return $this->arr[$id - 1];
+        return User::query()->where(['id' => $id])->first();
     }
 
     public function authorization(Request $request)
