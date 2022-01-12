@@ -23,10 +23,9 @@ html{
 
 </style>
 <script>
-// import intro from "./components/intro"
 import main from "@/components/main";
 export default {
-  // eslint-disable-next-line vue/no-unused-components
+    // eslint-disable-next-line vue/no-unused-components
   components: {main}
 }
 </script>

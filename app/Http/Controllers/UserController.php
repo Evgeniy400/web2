@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 
@@ -37,7 +38,6 @@ class UserController extends Controller
 
     public function authorization(Request $request)
     {
-        $arr = [];
         $arr = User::query()->where(['name' => $request->get('name')])->first();
         if ($arr == NULL) {
             return [

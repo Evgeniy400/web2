@@ -19,6 +19,5 @@ export default {
 </script>
 
 <style scoped src="../assets/styles/footer_style.css">
-
 </style>
 

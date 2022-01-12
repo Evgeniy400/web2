@@ -8,7 +8,7 @@
     <img src = "../assets/images/angry_bea.png" alt ="" />
 
 
-    <nav><a href="https://minecraft.fandom.com/ru"> <h2>О нас</h2>  </a> <a href="#"><h2>Корзина</h2>  </a></nav>
+    <nav><a href="https://minecraft.fandom.com/ru"> <h2>О нас</h2>  </a> <a href="#"><h2>Корзина <app-cart></app-cart> </h2>  </a></nav>
 
   </header>
 </template>

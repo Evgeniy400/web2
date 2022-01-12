@@ -31,7 +31,7 @@
               </span>
             </div>
           </div>
-          <a href="#" class="btn"><span class="text">Добавить в корзину</span></a>
+          <a @click = "addToCart(element)" class="btn"><span class="text">Добавить в корзину</span></a>
 
         </div>
       </div>
@@ -52,14 +52,9 @@
 <script>
 import footer_ from "./footer";
 import header_ from "./header";
-import element from "@/components/element";
 
 export default {
   name: "item_page",
-  props: {
-    element: element,
-    id: String
-  },
   components: {
     // eslint-disable-next-line vue/no-unused-components
     footer_,
@@ -69,10 +64,24 @@ export default {
   beforeCreate: function() {
     document.body.className = 'item_page';
   },
-  created() {
-    this.id = this.$route.params.id
-    this.element = this.$route.params.element
-  }
+    methods: {
+        addToCart(product){
+            const params = {
+                id: product.id, count: 1, userId: localStorage.userId
+            }
+            this.$http.post('/cart', params)
+        }
+    },
+    data() {
+        return {
+            element: null
+        }
+    },
+    created() {
+        const id = this.$route.params.id
+        this.$http.get('/products/' + id)
+            .then(response => this.element = response.data)
+    }
 }
 </script>
 

@@ -7,6 +7,7 @@ import header from '@/components/header'
 import main from '@/components/main'
 import item_page from "@/components/item_page"
 import footer from '@/components/footer'
+import cart from '@/components/cart'
 
 Vue.component('app-intro', intro)
 Vue.component('app-element', element)
@@ -14,6 +15,7 @@ Vue.component('app-header', header)
 Vue.component('app-main', main)
 Vue.component('app-item_page', item_page)
 Vue.component('app-footer', footer)
+Vue.component('app-cart', cart)
 Vue.use(VueRouter)
 
 const routes = [
